@@ -27,20 +27,44 @@ export default function Egresados() {
     try {
       setCargando(true);
       const r = await fetch(`${API_URL}/api/egresados`);
-      setLista(await r.json());
-    } catch { alert("No se pudo conectar con el servidor."); }
-    finally   { setCargando(false); }
+      const response = await r.json();
+      console.log("[API Response] Egresados:", response);
+      console.log("[Data Type]", typeof response);
+      console.log("[Is Array]", Array.isArray(response));
+      
+      // Manejar estructura de respuesta: {success, data} o array directo
+      const datos = response.data && Array.isArray(response.data) 
+        ? response.data 
+        : Array.isArray(response) 
+          ? response 
+          : [];
+      
+      setLista(datos);
+    } catch (error) { 
+      console.error("[Error] Fetch fallido:", error);
+      alert("No se pudo conectar con el servidor.");
+      setLista([]);
+    }
+    finally { setCargando(false); }
   };
 
   const eliminar = async (id, nombre) => {
     if (!confirm(`¿Eliminar a ${nombre}? Esta acción no se puede deshacer.`)) return;
-    await fetch(`${API_URL}/api/egresados/${id}`, { method: "DELETE" });
-    setLista(p => p.filter(e => e.no_control !== id));
+    try {
+      await fetch(`${API_URL}/api/egresados/${id}`, { method: "DELETE" });
+      // Usar Array.isArray para proteger el filtro
+      setLista(p => (Array.isArray(p) ? p : []).filter(e => e.no_control !== id));
+    } catch (error) {
+      console.error("[Error] Eliminar fallido:", error);
+      alert("No se pudo eliminar el egresado.");
+    }
   };
 
-  const carreras = [...new Set(lista.map(e => e.carrera).filter(Boolean))];
+  // Proteger lista con Array.isArray
+  const listaSegura = Array.isArray(lista) ? lista : [];
+  const carreras = [...new Set(listaSegura.map(e => e.carrera).filter(Boolean))];
 
-  const filtrados = lista.filter(e => {
+  const filtrados = listaSegura.filter(e => {
     const nb = e.nombre_completo?.toLowerCase().includes(busqueda.toLowerCase());
     const cr = !carrera || e.carrera === carrera;
     return nb && cr;
@@ -86,7 +110,7 @@ export default function Egresados() {
       ) : (
         <div className="tabla-wrapper">
           <div className="tabla-info">
-            Mostrando <strong>{filtrados.length}</strong> de <strong>{lista.length}</strong> registros
+            Mostrando <strong>{filtrados.length}</strong> de <strong>{listaSegura.length}</strong> registros
           </div>
           <div style={{ overflowX: "auto" }}>
             <table className="egr-table">

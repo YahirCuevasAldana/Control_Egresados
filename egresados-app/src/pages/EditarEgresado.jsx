@@ -74,7 +74,17 @@ export default function EditarEgresado() {
   useEffect(() => {
     fetch(`${API_URL}/api/egresados/${id}`)
       .then(r => r.json())
-      .then(data => {
+      .then(response => {
+        console.log("[API Response] Egresado:", response);
+        console.log("[Data Type]", typeof response);
+        
+        // Manejar estructura de respuesta: {success, data: {...}} o objeto directo
+        const data = response.data && typeof response.data === 'object' && !Array.isArray(response.data)
+          ? response.data
+          : typeof response === 'object' && !Array.isArray(response)
+            ? response
+            : INIT;
+        
         // Asegurar que todos los campos de INIT existan en data
         const norm = Object.keys(INIT).reduce((acc, key) => {
           acc[key] = data[key] !== null && data[key] !== undefined ? data[key] : INIT[key];
@@ -94,12 +104,12 @@ export default function EditarEgresado() {
           norm.fecha_titulacion = norm.fecha_titulacion.split("T")[0];
         }
         
-        console.log("Datos cargados:", norm);
+        console.log("[Normalized Data]", norm);
         setForm(norm);
         setCargando(false);
       })
       .catch(err => { 
-        console.error("Error al cargar egresado:", err);
+        console.error("[Error] Fetch fallido:", err);
         alert("No se pudo cargar los datos del egresado."); 
         navigate("/egresados"); 
       });
@@ -152,14 +162,17 @@ export default function EditarEgresado() {
         body: JSON.stringify(form),
       });
       const data = await res.json();
+      console.log("[API Response] Actualizar egresado:", data);
+      
       if (res.ok) {
         setToast("✅ Egresado actualizado");
         setTimeout(() => navigate("/egresados"), 1500);
       } else {
-        setToast("❌ Error: " + data.message);
+        setToast("❌ Error: " + (data.message || "Error desconocido"));
         setTimeout(() => setToast(""), 3000);
       }
-    } catch {
+    } catch (error) {
+      console.error("[Error] Actualizar fallido:", error);
       setToast("❌ Sin conexión al servidor");
       setTimeout(() => setToast(""), 3000);
     }

@@ -37,18 +37,22 @@ useEffect(() => {
   fetch(`${API_URL}/api/egresados`)
     .then(r => r.json())
     .then(response => {
-      console.log("Respuesta API:", response);
+      console.log("[API Response] Dashboard:", response);
+      console.log("[Data Type]", typeof response);
+      console.log("[Is Array]", Array.isArray(response));
 
-      setData(
-        response.success && Array.isArray(response.data)
-          ? response.data
-          : []
-      );
+      // Manejar estructura de respuesta: {success, data} o array directo
+      const datos = response.data && Array.isArray(response.data)
+        ? response.data
+        : Array.isArray(response)
+          ? response
+          : [];
 
+      setData(datos);
       setCargando(false);
     })
     .catch(error => {
-      console.error("Error al cargar egresados:", error);
+      console.error("[Error] Fetch fallido:", error);
       setData([]);
       setCargando(false);
     });

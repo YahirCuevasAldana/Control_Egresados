@@ -131,14 +131,17 @@ export default function AgregarEgresado() {
         body: JSON.stringify(form),
       });
       const data = await res.json();
+      console.log("[API Response] Crear egresado:", data);
+      
       if (res.ok) {
         setToast("✅ Egresado guardado con éxito");
         setTimeout(() => navigate("/egresados"), 1500);
       } else {
-        setToast("❌ Error: " + data.message);
+        setToast("❌ Error: " + (data.message || "Error desconocido"));
         setTimeout(() => setToast(""), 3000);
       }
-    } catch {
+    } catch (error) {
+      console.error("[Error] Guardar fallido:", error);
       setToast("❌ No se pudo conectar con el servidor");
       setTimeout(() => setToast(""), 3000);
     }
