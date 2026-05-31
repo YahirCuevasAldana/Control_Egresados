@@ -65,6 +65,7 @@ const Select = ({ label, name, opts, req = true, form, set, errores }) => (
   </div>
 );
 
+
 export default function AgregarEgresado() {
   const navigate = useNavigate();
   const [form, setForm]       = useState(INIT);
