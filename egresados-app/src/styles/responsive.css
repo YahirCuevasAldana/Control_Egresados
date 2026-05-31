@@ -1,0 +1,359 @@
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE.CSS – BREAKPOINTS Y UTILIDADES RESPONSIVE
+══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────
+   COMMENTARIOS DE BREAKPOINTS
+───────────────────────────────────────────────────────────────
+   Mobile:  0px - 768px      (Teléfonos inteligentes)
+   Tablet:  769px - 1024px   (Tabletas y dispositivos medianos)
+   Desktop: 1025px+          (Computadoras y pantallas grandes)
+─────────────────────────────────────────────────────────────── */
+
+/* ══════════════════════════════════════════════════════════════
+   VARIABLES RESPONSIVE (Adicionales)
+══════════════════════════════════════════════════════════════ */
+:root {
+  /* Tipografía fluida para mobile-first */
+  --font-size-xs: clamp(10px, 2vw, 12px);      /* 10-12px */
+  --font-size-sm: clamp(11px, 2.2vw, 13.5px);  /* 11-13.5px */
+  --font-size-base: clamp(13px, 2.5vw, 14px);  /* 13-14px */
+  --font-size-lg: clamp(15px, 3vw, 18px);      /* 15-18px */
+  --font-size-xl: clamp(18px, 4vw, 22px);      /* 18-22px */
+  --font-size-2xl: clamp(20px, 5vw, 28px);     /* 20-28px */
+  
+  /* Espaciados fluidos */
+  --space-xs: clamp(4px, 1vw, 8px);
+  --space-sm: clamp(8px, 2vw, 12px);
+  --space-md: clamp(12px, 2.5vw, 16px);
+  --space-lg: clamp(16px, 3vw, 24px);
+  --space-xl: clamp(20px, 4vw, 32px);
+  --space-2xl: clamp(28px, 5vw, 48px);
+  
+  /* Radio de borde responsive */
+  --radius-sm: clamp(6px, 1vw, 8px);
+  --radius-md: clamp(8px, 1.5vw, 12px);
+  --radius-lg: clamp(12px, 2vw, 16px);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TIPOGRAFÍA FLUIDA Y RESPONSIVE
+══════════════════════════════════════════════════════════════ */
+
+body {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+}
+
+/* Títulos responsivos */
+h1 { font-size: var(--font-size-2xl); line-height: 1.2; }
+h2 { font-size: var(--font-size-xl); line-height: 1.3; }
+h3 { font-size: var(--font-size-lg); line-height: 1.3; }
+h4 { font-size: var(--font-size-base); line-height: 1.4; }
+
+/* ══════════════════════════════════════════════════════════════
+   CONTENEDOR RESPONSIVO
+══════════════════════════════════════════════════════════════ */
+
+.container-responsive {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+/* Tablet y superior: max-width definido */
+@media (min-width: 1025px) {
+  .container-responsive {
+    max-width: 1300px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   FLEXBOX RESPONSIVO
+══════════════════════════════════════════════════════════════ */
+
+/* Flex que se apila en móvil */
+.flex-responsive {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+@media (min-width: 769px) {
+  .flex-responsive {
+    flex-direction: row;
+  }
+}
+
+/* Flex con auto-wrapping para grid */
+.flex-wrap-responsive {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+@media (max-width: 768px) {
+  .flex-wrap-responsive {
+    gap: var(--space-sm);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   GRID RESPONSIVO
+══════════════════════════════════════════════════════════════ */
+
+/* Grid de 1 columna en móvil, 2 en tablet, 3+ en desktop */
+.grid-auto {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+@media (min-width: 769px) {
+  .grid-auto {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1025px) {
+  .grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+/* Grid flexible con minmax */
+.grid-minmax {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-md);
+}
+
+@media (max-width: 768px) {
+  .grid-minmax {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--space-sm);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   VISIBILIDAD RESPONSIVA
+══════════════════════════════════════════════════════════════ */
+
+/* Mostrar solo en mobile */
+.show-mobile {
+  display: block;
+}
+@media (min-width: 769px) {
+  .show-mobile {
+    display: none;
+  }
+}
+
+/* Mostrar solo en tablet */
+.show-tablet {
+  display: none;
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .show-tablet {
+    display: block;
+  }
+}
+
+/* Mostrar solo en desktop */
+.show-desktop {
+  display: none;
+}
+@media (min-width: 1025px) {
+  .show-desktop {
+    display: block;
+  }
+}
+
+/* Ocultar solo en mobile */
+.hide-mobile {
+  display: none;
+}
+@media (min-width: 769px) {
+  .hide-mobile {
+    display: block;
+  }
+}
+
+/* Ocultar en mobile */
+.no-mobile {
+  display: none;
+}
+@media (min-width: 769px) {
+  .no-mobile {
+    display: block;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TAMAÑOS RESPONSIVOS DE IMÁGENES
+══════════════════════════════════════════════════════════════ */
+
+.img-responsive {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 100%;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BOTONES RESPONSIVOS
+══════════════════════════════════════════════════════════════ */
+
+.btn {
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+/* Botones táctiles en móvil (área mínima 44x44px) */
+@media (max-width: 768px) {
+  .btn {
+    min-height: 44px;
+    min-width: 44px;
+    padding: var(--space-md) var(--space-lg);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   INPUTS Y FORMULARIOS RESPONSIVOS
+══════════════════════════════════════════════════════════════ */
+
+.input-responsive {
+  width: 100%;
+  padding: var(--space-md);
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-md);
+}
+
+/* Aumentar target táctil en móvil */
+@media (max-width: 768px) {
+  .input-responsive {
+    min-height: 44px;
+    padding: var(--space-md) var(--space-lg);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TABLAS RESPONSIVAS
+══════════════════════════════════════════════════════════════ */
+
+.table-responsive-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+  .table-responsive-wrap {
+    border: 1px solid var(--borde);
+    border-radius: var(--radius-md);
+  }
+  
+  .table-responsive-wrap table {
+    min-width: 500px;
+  }
+}
+
+/* Tabla transformada en bloques en móvil */
+.table-stack {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .table-stack thead {
+    display: none;
+  }
+  
+  .table-stack tbody,
+  .table-stack tr,
+  .table-stack td {
+    display: block;
+  }
+  
+  .table-stack tr {
+    margin-bottom: var(--space-lg);
+    border: 1px solid var(--borde);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+  }
+  
+  .table-stack td {
+    text-align: right;
+    padding-left: 50%;
+    padding: var(--space-sm);
+    position: relative;
+  }
+  
+  .table-stack td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: var(--space-md);
+    font-weight: 600;
+    color: var(--texto-gris);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SCROLL SUAVE Y TOUCH-FRIENDLY
+══════════════════════════════════════════════════════════════ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Evitar zoom involuntario en inputs en iOS */
+@media (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PUNTOS DE QUIEBRE ADICIONALES
+══════════════════════════════════════════════════════════════ */
+
+/* Pantallas muy pequeñas (< 360px) */
+@media (max-width: 360px) {
+  body {
+    font-size: clamp(12px, 2vw, 13px);
+  }
+  
+  .page-wrap {
+    padding: 16px 12px 40px;
+  }
+}
+
+/* Pantallas extra grandes (> 1920px) */
+@media (min-width: 1920px) {
+  .page-wrap {
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+}
+
+/* Orientación: Apaisada en móvil */
+@media (max-width: 768px) and (orientation: landscape) {
+  body {
+    overflow-y: scroll;
+  }
+  
+  /* Reducir padding en landscape móvil */
+  .page-wrap {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+}

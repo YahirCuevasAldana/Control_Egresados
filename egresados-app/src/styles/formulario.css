@@ -1,0 +1,367 @@
+/* ══════════════════════════════════════════════════════════════
+   FORMULARIOS  –  formulario.css
+   DISEÑO COMPLETAMENTE RESPONSIVE
+══════════════════════════════════════════════════════════════ */
+
+.form-shell {
+  background: var(--blanco);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--sombra);
+  border: 1px solid var(--borde);
+  overflow: hidden;
+}
+
+/* ─────────────────────────────────────────
+   BARRA DE PASOS
+───────────────────────────────────────── */
+
+.pasos-bar {
+  display: flex;
+  background: var(--azul);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.2) transparent;
+}
+
+.pasos-bar::-webkit-scrollbar {
+  height: 4px;
+}
+
+.pasos-bar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pasos-bar::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.2);
+  border-radius: 2px;
+}
+
+.paso {
+  flex: 1;
+  min-width: clamp(110px, 20vw, 130px);
+  padding: clamp(12px, 2vw, 16px) clamp(8px, 1.5vw, 10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(4px, 1vw, 6px);
+  border-right: 1px solid rgba(255,255,255,.09);
+  cursor: pointer;
+  transition: background 0.2s;
+  
+  /* Touch-friendly */
+  min-height: 44px;
+  justify-content: center;
+}
+
+.paso:last-child { 
+  border-right: none; 
+}
+
+.paso:hover { 
+  background: rgba(255,255,255,.07); 
+}
+
+.paso.activo { 
+  background: var(--naranja); 
+}
+
+.paso.listo { 
+  background: rgba(255,255,255,.12); 
+}
+
+.paso-num {
+  width: clamp(22px, 4vw, 26px);
+  height: clamp(22px, 4vw, 26px);
+  border-radius: 50%;
+  background: rgba(255,255,255,.18);
+  color: white;
+  font-size: clamp(10px, 2vw, 12px);
+  font-weight: 700;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.paso.activo .paso-num { 
+  background: rgba(255,255,255,.3); 
+}
+
+.paso.listo .paso-num { 
+  background: rgba(255,255,255,.25); 
+}
+
+.paso-label {
+  font-size: clamp(9px, 1.8vw, 11px);
+  font-weight: 600;
+  color: rgba(255,255,255,.6);
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.paso.activo .paso-label { 
+  color: white; 
+}
+
+.paso.listo .paso-label { 
+  color: rgba(255,255,255,.85); 
+}
+
+/* ─────────────────────────────────────────
+   BARRA DE PROGRESO
+───────────────────────────────────────── */
+
+.progreso-bar {
+  height: 4px;
+  background: var(--borde);
+}
+
+.progreso-fill {
+  height: 100%;
+  background: var(--naranja);
+  transition: width 0.4s ease;
+}
+
+/* ─────────────────────────────────────────
+   CUERPO DEL FORMULARIO
+───────────────────────────────────────── */
+
+.form-body {
+  padding: clamp(20px, 4vw, 30px) clamp(16px, 3vw, 34px);
+}
+
+.seccion-titulo {
+  font-size: clamp(13px, 2vw, 15px);
+  font-weight: 700;
+  color: var(--azul);
+  padding-bottom: clamp(8px, 1.5vw, 12px);
+  margin-bottom: clamp(16px, 2vw, 22px);
+  border-bottom: 2px solid var(--borde);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.seccion-icono {
+  width: clamp(26px, 5vw, 30px);
+  height: clamp(26px, 5vw, 30px);
+  border-radius: var(--radius-md);
+  background: var(--naranja);
+  color: white;
+  font-size: clamp(11px, 2vw, 13px);
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────
+   CAMPOS DE FORMULARIO
+───────────────────────────────────────── */
+
+.campo { 
+  margin-bottom: clamp(14px, 2vw, 18px); 
+}
+
+.campo label {
+  display: block;
+  font-size: clamp(11px, 2vw, 12px);
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 6px;
+  letter-spacing: .2px;
+}
+
+.campo label .req {
+  color: var(--naranja);
+  margin-left: 2px;
+}
+
+.campo input,
+.campo select {
+  width: 100%;
+  padding: clamp(9px, 1.5vw, 10px) clamp(12px, 2vw, 14px);
+  border: 1.5px solid var(--borde);
+  border-radius: var(--radius-md);
+  font-size: clamp(13px, 2.5vw, 14px);
+  color: var(--texto-dark);
+  background: white;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Aumentar tamaño táctil en móvil */
+@media (max-width: 768px) {
+  .campo input,
+  .campo select {
+    min-height: 44px;
+    font-size: 16px;
+    padding: 12px 14px;
+  }
+}
+
+.campo input:focus,
+.campo select:focus {
+  border-color: var(--azul-claro);
+  box-shadow: 0 0 0 3px rgba(42,82,152,.1);
+}
+
+.campo input.err,
+.campo select.err {
+  border-color: var(--rojo);
+  box-shadow: 0 0 0 3px rgba(220,38,38,.08);
+}
+
+.campo input:disabled {
+  background: #f8fafc;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.campo-error {
+  font-size: var(--font-size-xs);
+  color: var(--rojo);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* ─────────────────────────────────────────
+   NAVEGACIÓN DEL WIZARD
+───────────────────────────────────────── */
+
+.form-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: clamp(12px, 2vw, 18px) clamp(16px, 3vw, 34px) clamp(16px, 2vw, 28px);
+  border-top: 1px solid var(--borde);
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.form-nav-info {
+  font-size: var(--font-size-xs);
+  color: var(--texto-gris);
+}
+
+/* ─────────────────────────────────────────
+   TOAST DE ÉXITO
+───────────────────────────────────────── */
+
+.toast-ok {
+  position: fixed;
+  bottom: clamp(16px, 3vw, 24px);
+  right: clamp(16px, 3vw, 24px);
+  background: #15803d;
+  color: white;
+  padding: clamp(12px, 1.5vw, 14px) clamp(16px, 2vw, 22px);
+  border-radius: var(--radius-lg);
+  font-size: clamp(13px, 2vw, 14px);
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0,0,0,.2);
+  z-index: 9999;
+  animation: toastIn 0.3s ease both;
+  max-width: clamp(240px, 80vw, 100%);
+}
+
+@keyframes toastIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to   { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* ═════════════════════════════════════════════════
+   RESPONSIVE QUERIES
+═════════════════════════════════════════════════ */
+
+/* Mobile: max-width 768px */
+@media (max-width: 768px) {
+  .form-body { 
+    padding: 16px 12px; 
+  }
+  
+  .form-nav { 
+    padding: 12px 12px 16px;
+    flex-direction: column-reverse;
+  }
+  
+  .form-nav-info {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .pasos-bar { 
+    min-width: max-content; 
+  }
+  
+  .paso {
+    min-width: 100px;
+  }
+  
+  /* Full-width buttons en móvil */
+  .form-nav .btn-azul,
+  .form-nav .btn-borde,
+  .form-nav .btn-naranja {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Tablet: 769px - 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .form-body { 
+    padding: 20px 20px; 
+  }
+  
+  .form-nav { 
+    padding: 14px 20px;
+  }
+}
+
+/* Desktop: 1025px+ */
+@media (min-width: 1025px) {
+  .form-body { 
+    padding: 30px 34px; 
+  }
+  
+  .form-nav { 
+    padding: 18px 34px 28px; 
+  }
+}
+
+/* Pantalla muy pequeña */
+@media (max-width: 360px) {
+  .form-shell {
+    border-radius: var(--radius-md);
+  }
+  
+  .form-body {
+    padding: 12px 8px;
+  }
+  
+  .seccion-titulo {
+    font-size: 12px;
+  }
+}
+
+/* Landscape móvil */
+@media (max-width: 768px) and (orientation: landscape) {
+  .form-body {
+    padding: 12px 16px;
+  }
+  
+  .pasos-bar {
+    min-height: 50px;
+  }
+  
+  .paso {
+    min-width: 90px;
+  }
+}

@@ -1,0 +1,288 @@
+/* ══════════════════════════════════════════════════════════════
+   DASHBOARD  –  dashboard.css
+   DISEÑO COMPLETAMENTE RESPONSIVE
+══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────
+   STAT CARDS (Tarjetas de estadísticas)
+───────────────────────────────────────── */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+/* Tablet: 2 columnas */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: auto-fit con minmax */
+@media (min-width: 1025px) {
+  .stat-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: clamp(16px, 2vw, 20px);
+  }
+}
+
+.stat-card {
+  background: var(--blanco);
+  border-radius: var(--radius-lg);
+  padding: clamp(16px, 2vw, 22px) clamp(16px, 2vw, 24px);
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 18px);
+  box-shadow: var(--sombra-sm);
+  border: 1px solid var(--borde);
+  transition: box-shadow 0.2s, transform 0.2s;
+  animation: fadeInUp .4s both;
+}
+
+.stat-card:hover { 
+  box-shadow: var(--sombra); 
+  transform: translateY(-3px); 
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(16px); 
+  }
+  to   { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.stat-icon {
+  width: clamp(44px, 8vw, 54px);
+  height: clamp(44px, 8vw, 54px);
+  border-radius: var(--radius-lg);
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  font-size: clamp(20px, 4vw, 24px);
+  flex-shrink: 0;
+}
+
+.stat-info-label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--texto-gris);
+  text-transform: uppercase;
+  letter-spacing: .6px;
+}
+
+.stat-info-value {
+  font-size: clamp(20px, 5vw, 30px);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-top: 2px;
+}
+
+/* ─────────────────────────────────────────
+   QUICK ACTION CARDS
+───────────────────────────────────────── */
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+
+/* Tablet y desktop: 2 columnas */
+@media (min-width: 769px) {
+  .quick-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: clamp(12px, 2vw, 16px);
+  }
+}
+
+.quick-card {
+  background: var(--blanco);
+  border-radius: var(--radius-lg);
+  padding: clamp(16px, 2vw, 20px) clamp(16px, 2vw, 22px);
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 16px);
+  box-shadow: var(--sombra-sm);
+  border: 1px solid var(--borde);
+  border-left: 4px solid var(--naranja);
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.15s;
+  animation: fadeInUp .5s .1s both;
+}
+
+.quick-card:hover { 
+  box-shadow: var(--sombra); 
+  transform: translateY(-3px); 
+}
+
+.quick-icon { 
+  font-size: clamp(24px, 4vw, 28px);
+  flex-shrink: 0; 
+}
+
+.quick-titulo { 
+  font-size: clamp(13px, 2vw, 14px);
+  font-weight: 600; 
+  color: var(--azul); 
+}
+
+.quick-desc { 
+  font-size: var(--font-size-xs);
+  color: var(--texto-gris); 
+  margin-top: 2px; 
+}
+
+/* ─────────────────────────────────────────
+   CHARTS GRID (Gráficas)
+───────────────────────────────────────── */
+
+/* Mobile: 1 columna */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+/* Tablet: 2 columnas */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .charts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(12px, 2vw, 16px);
+  }
+}
+
+/* Desktop: 3 columnas con ratios adaptativos */
+@media (min-width: 1025px) {
+  .charts-grid {
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: clamp(16px, 2vw, 20px);
+  }
+}
+
+/* Extra large screens */
+@media (min-width: 1920px) {
+  .charts-grid {
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.chart-card {
+  background: var(--blanco);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--borde);
+  box-shadow: var(--sombra-sm);
+  overflow: hidden;
+  animation: fadeInUp .5s .2s both;
+}
+
+.chart-card-header {
+  padding: clamp(12px, 2vw, 14px) clamp(16px, 2vw, 20px);
+  border-bottom: 1px solid var(--borde);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.chart-card-dot {
+  width: 10px; 
+  height: 10px;
+  border-radius: 50%;
+  background: var(--naranja);
+  flex-shrink: 0;
+}
+
+.chart-card-titulo {
+  font-size: clamp(11px, 2vw, 13px);
+  font-weight: 700;
+  color: var(--azul);
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  line-height: 1.3;
+}
+
+.chart-card-body {
+  padding: clamp(14px, 2vw, 20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Altura responsiva */
+  min-height: clamp(200px, 30vw, 260px);
+}
+
+/* ═════════════════════════════════════════════════
+   RESPONSIVE QUERIES
+═════════════════════════════════════════════════ */
+
+/* Mobile pequeño: max-width 360px */
+@media (max-width: 360px) {
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .stat-info-value {
+    font-size: 24px;
+  }
+  
+  .quick-card {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Mobile: max-width 768px */
+@media (max-width: 768px) {
+  .stat-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  
+  .quick-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+  
+  .charts-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
+/* Tablet: 769px - 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .chart-card-body {
+    min-height: 200px;
+  }
+}
+
+/* Landscape móvil */
+@media (max-width: 768px) and (orientation: landscape) {
+  .stat-grid {
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+  
+  .quick-grid {
+    margin-bottom: var(--space-lg);
+  }
+  
+  .chart-card-body {
+    min-height: 180px;
+  }
+}

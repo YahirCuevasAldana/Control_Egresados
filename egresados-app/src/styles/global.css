@@ -1,0 +1,338 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import './responsive.css';
+
+/* ══════════════════════════════════════════
+   VARIABLES INSTITUCIONALES ITSH
+══════════════════════════════════════════ */
+:root {
+  --azul:         #0a1f44;
+  --azul-medio:   #1a3a6e;
+  --azul-claro:   #2a5298;
+  --naranja:      #f97316;
+  --naranja-dark: #ea6a00;
+  --blanco:       #ffffff;
+  --fondo:        #f0f4fa;
+  --borde:        #e2e8f0;
+  --texto-gris:   #64748b;
+  --texto-dark:   #1e293b;
+  --verde:        #16a34a;
+  --rojo:         #dc2626;
+  --amarillo:     #d97706;
+  
+  /* Responsive variables */
+  --sidebar-w:    260px;
+  --topbar-h:     64px;
+  --radio:        12px;
+  --sombra:       0 4px 20px rgba(10,31,68,.10);
+  --sombra-sm:    0 2px 8px  rgba(10,31,68,.07);
+}
+
+/* ══════════════════════════════════════════
+   RESET
+══════════════════════════════════════════ */
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--fondo);
+  color: var(--texto-dark);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { 
+  text-decoration: none; 
+  color: inherit; 
+  transition: color 0.2s ease;
+}
+
+button { 
+  font-family: 'Poppins', sans-serif; 
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  background: none;
+}
+
+input, 
+select, 
+textarea { 
+  font-family: 'Poppins', sans-serif;
+  font-size: inherit;
+}
+
+/* Prevenir zoom en inputs en iOS */
+@media (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   LAYOUT PRINCIPAL
+══════════════════════════════════════════ */
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* Desktop: Sidebar en el lado izquierdo */
+}
+
+/* Desktop: Flex horizontal con sidebar fijo */
+@media (min-width: 769px) {
+  .app-shell {
+    flex-direction: row;
+  }
+}
+
+.main-area {
+  flex: 1;
+  min-height: 100vh;
+  background: var(--fondo);
+  transition: margin-left 0.3s ease;
+  
+  /* Mobile: Sin margen (topbar maneja el espacio) */
+  margin-left: 0;
+  margin-top: var(--topbar-h);
+}
+
+/* Tablet y Desktop: Margin-left para sidebar fijo */
+@media (min-width: 769px) {
+  .main-area {
+    margin-left: var(--sidebar-w);
+    margin-top: 0;
+  }
+}
+
+.page-wrap {
+  /* Responsive padding */
+  padding: clamp(16px, 3vw, 36px) clamp(12px, 3vw, 36px) clamp(40px, 5vw, 60px);
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Extra large screens */
+@media (min-width: 1920px) {
+  .page-wrap {
+    max-width: 1600px;
+  }
+}
+
+/* ══════════════════════════════════════════
+   ENCABEZADO DE PÁGINA
+══════════════════════════════════════════ */
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+.page-title {
+  /* Tipografía responsive con clamp */
+  font-size: clamp(18px, 5vw, 28px);
+  font-weight: 700;
+  color: var(--azul);
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.page-sub {
+  font-size: var(--font-size-sm);
+  color: var(--texto-gris);
+  margin-top: 3px;
+  line-height: 1.4;
+}
+
+/* En móvil: Header full-width */
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+}
+
+/* ══════════════════════════════════════════
+   BOTONES GLOBALES
+══════════════════════════════════════════ */
+
+/* Botón primario azul */
+.btn-azul {
+  display: inline-flex; 
+  align-items: center; 
+  gap: var(--space-sm);
+  background: var(--azul); 
+  color: white;
+  border: none; 
+  border-radius: var(--radius-lg);
+  padding: clamp(8px, 1.5vw, 12px) clamp(16px, 2.5vw, 24px);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  
+  /* Touch-friendly en móvil */
+  min-height: 40px;
+  min-width: 40px;
+}
+.btn-azul:hover:not(:active) { 
+  background: var(--azul-medio); 
+  transform: translateY(-1px); 
+  box-shadow: 0 6px 16px rgba(10,31,68,.25); 
+}
+.btn-azul:active {
+  transform: translateY(0);
+}
+
+/* Botón secundario naranja */
+.btn-naranja {
+  display: inline-flex; 
+  align-items: center; 
+  gap: var(--space-sm);
+  background: var(--naranja); 
+  color: white;
+  border: none; 
+  border-radius: var(--radius-lg);
+  padding: clamp(8px, 1.5vw, 12px) clamp(16px, 2.5vw, 24px);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  
+  /* Touch-friendly */
+  min-height: 40px;
+  min-width: 40px;
+}
+.btn-naranja:hover:not(:active) { 
+  background: var(--naranja-dark); 
+  transform: translateY(-1px); 
+  box-shadow: 0 6px 16px rgba(249,115,22,.3); 
+}
+.btn-naranja:active {
+  transform: translateY(0);
+}
+
+/* Botón outline */
+.btn-borde {
+  display: inline-flex; 
+  align-items: center; 
+  gap: var(--space-sm);
+  background: transparent; 
+  color: var(--azul);
+  border: 1.5px solid var(--azul); 
+  border-radius: var(--radius-lg);
+  padding: clamp(8px, 1.5vw, 11px) clamp(16px, 2.5vw, 22px);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  transition: all 0.2s;
+  
+  /* Touch-friendly */
+  min-height: 40px;
+  min-width: 40px;
+}
+.btn-borde:hover:not(:active) { 
+  background: var(--azul); 
+  color: white; 
+}
+.btn-borde:active {
+  opacity: 0.8;
+}
+
+/* Botón peligro pequeño */
+.btn-peligro-sm {
+  display: inline-flex; 
+  align-items: center; 
+  gap: 5px;
+  background: #fee2e2; 
+  color: #991b1b;
+  border: none; 
+  border-radius: var(--radius-md);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  transition: background 0.15s;
+}
+.btn-peligro-sm:hover { background: #fecaca; }
+
+/* Botón aviso pequeño */
+.btn-aviso-sm {
+  display: inline-flex; 
+  align-items: center; 
+  gap: 5px;
+  background: #fef3c7; 
+  color: #92400e;
+  border: none; 
+  border-radius: var(--radius-md);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  transition: background 0.15s;
+}
+.btn-aviso-sm:hover { background: #fde68a; }
+
+/* ══════════════════════════════════════════
+   SPINNER Y CARGANDO
+══════════════════════════════════════════ */
+.spinner-centro {
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  padding: clamp(40px, 10vw, 70px) var(--space-md);
+  gap: var(--space-md); 
+  color: var(--texto-gris);
+  font-size: var(--font-size-sm);
+  text-align: center;
+}
+
+/* ══════════════════════════════════════════
+   MEDIA QUERIES FINALES
+══════════════════════════════════════════ */
+
+/* Mobile: max-width 768px */
+@media (max-width: 768px) {
+  /* El topbar ya maneja el espacio */
+  .main-area {
+    margin-top: var(--topbar-h);
+  }
+  
+  .page-wrap {
+    padding: 16px 12px 40px;
+  }
+}
+
+/* Tablet: 769px - 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .page-wrap {
+    padding: 24px 20px 50px;
+  }
+}
+
+/* Desktop: 1025px+ */
+@media (min-width: 1025px) {
+  .page-wrap {
+    padding: 32px 36px 60px;
+  }
+}
+
+/* Pantallas muy pequeñas */
+@media (max-width: 360px) {
+  .page-title {
+    font-size: 16px;
+  }
+  
+  .page-wrap {
+    padding: 12px 8px 30px;
+  }
+}

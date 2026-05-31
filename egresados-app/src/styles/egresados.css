@@ -1,0 +1,298 @@
+/* ══════════════════════════════════════════════════════════════
+   TABLA EGRESADOS  –  egresados.css
+   DISEÑO COMPLETAMENTE RESPONSIVE
+══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────
+   BARRA DE BÚSQUEDA
+───────────────────────────────────────── */
+
+.search-bar {
+  background: var(--blanco);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--borde);
+  box-shadow: var(--sombra-sm);
+  padding: clamp(12px, 2vw, 16px) clamp(14px, 2vw, 20px);
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+.search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: clamp(150px, 40vw, 200px);
+}
+
+.search-icon-pos {
+  position: absolute;
+  left: clamp(8px, 1.5vw, 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: clamp(14px, 2vw, 16px);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: clamp(7px, 1.5vw, 9px) clamp(10px, 2vw, 14px) clamp(7px, 1.5vw, 9px) clamp(32px, 3vw, 38px);
+  border: 1.5px solid var(--borde);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-input:focus { 
+  border-color: var(--azul-claro);
+  box-shadow: 0 0 0 3px rgba(42,82,152,.1);
+}
+
+/* Prevenir zoom en mobile */
+@media (max-width: 768px) {
+  .search-input {
+    font-size: 16px;
+  }
+}
+
+.search-select {
+  padding: clamp(7px, 1.5vw, 9px) clamp(10px, 2vw, 14px);
+  border: 1.5px solid var(--borde);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  background: white;
+  outline: none;
+  min-width: clamp(140px, 30vw, 180px);
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-select:focus { 
+  border-color: var(--azul-claro);
+  box-shadow: 0 0 0 3px rgba(42,82,152,.1);
+}
+
+/* Prevenir zoom en mobile */
+@media (max-width: 768px) {
+  .search-select {
+    font-size: 16px;
+  }
+}
+
+/* ─────────────────────────────────────────
+   TABLA WRAPPER
+───────────────────────────────────────── */
+
+.tabla-wrapper {
+  background: var(--blanco);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--borde);
+  box-shadow: var(--sombra-sm);
+  overflow: hidden;
+}
+
+.tabla-info {
+  padding: clamp(10px, 1.5vw, 14px) clamp(12px, 2vw, 20px);
+  border-bottom: 1px solid var(--borde);
+  font-size: var(--font-size-xs);
+  color: var(--texto-gris);
+  font-weight: 500;
+}
+
+/* ─────────────────────────────────────────
+   TABLA RESPONSIVA
+───────────────────────────────────────── */
+
+table.egr-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.egr-table thead tr {
+  background: var(--azul);
+}
+
+table.egr-table thead th {
+  padding: clamp(10px, 1.5vw, 13px) clamp(12px, 2vw, 16px);
+  color: white;
+  font-size: clamp(10px, 2vw, 12px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  white-space: nowrap;
+  text-align: left;
+}
+
+table.egr-table tbody tr {
+  border-bottom: 1px solid var(--borde);
+  transition: background 0.15s;
+}
+
+table.egr-table tbody tr:last-child { 
+  border-bottom: none; 
+}
+
+table.egr-table tbody tr:hover { 
+  background: #f8faff; 
+}
+
+table.egr-table tbody td {
+  padding: clamp(10px, 1.5vw, 12px) clamp(12px, 2vw, 16px);
+  font-size: var(--font-size-sm);
+  color: #334155;
+  vertical-align: middle;
+}
+
+.no-control-badge {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 3px 9px;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  display: inline-block;
+}
+
+/* ─────────────────────────────────────────
+   BADGES ACTIVIDAD
+───────────────────────────────────────── */
+
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: clamp(10px, 1.8vw, 12px);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-trabaja  { background: #dcfce7; color: #15803d; }
+.badge-estudia  { background: #dbeafe; color: #1d4ed8; }
+.badge-ambos    { background: #fef9c3; color: #854d0e; }
+.badge-ninguno  { background: #f1f5f9; color: #64748b; }
+
+/* ─────────────────────────────────────────
+   TABLA SIN RESULTADOS
+───────────────────────────────────────── */
+
+.tabla-vacia {
+  text-align: center;
+  padding: clamp(30px, 5vw, 50px) var(--space-md);
+  color: var(--texto-gris);
+}
+
+.tabla-vacia-ico { 
+  font-size: clamp(32px, 8vw, 40px);
+  margin-bottom: var(--space-md); 
+}
+
+.tabla-vacia-txt { 
+  font-size: var(--font-size-sm);
+  font-weight: 500; 
+}
+
+/* ═════════════════════════════════════════════════
+   RESPONSIVE QUERIES
+═════════════════════════════════════════════════ */
+
+/* Mobile: max-width 768px */
+@media (max-width: 768px) {
+  .search-bar {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  .search-wrap {
+    width: 100%;
+    min-width: unset;
+  }
+  
+  .search-select {
+    width: 100%;
+    min-width: unset;
+  }
+  
+  /* Tabla en scroll horizontal */
+  .tabla-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  table.egr-table {
+    min-width: 500px;
+    font-size: 13px;
+  }
+  
+  /* Ocultar algunas columnas en móvil si es necesario */
+  table.egr-table thead th:nth-child(n+5),
+  table.egr-table tbody td:nth-child(n+5) {
+    display: none;
+  }
+}
+
+/* Tablet: 769px - 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .search-bar {
+    gap: var(--space-md);
+  }
+  
+  .search-wrap {
+    flex: 0 1 55%;
+  }
+  
+  .search-select {
+    flex: 0 1 35%;
+  }
+  
+  table.egr-table {
+    font-size: 13px;
+  }
+}
+
+/* Desktop: 1025px+ */
+@media (min-width: 1025px) {
+  .search-bar {
+    gap: var(--space-md);
+  }
+  
+  .search-wrap {
+    flex: 1;
+  }
+  
+  .search-select {
+    flex: 0 1 auto;
+  }
+}
+
+/* Pantalla muy pequeña */
+@media (max-width: 360px) {
+  .search-bar {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+  
+  table.egr-table {
+    min-width: 450px;
+  }
+  
+  /* Mostrar menos columnas */
+  table.egr-table thead th:nth-child(n+4),
+  table.egr-table tbody td:nth-child(n+4) {
+    display: none;
+  }
+}
+
+/* Landscape móvil */
+@media (max-width: 768px) and (orientation: landscape) {
+  .tabla-info {
+    padding: 8px 12px;
+  }
+  
+  table.egr-table tbody td {
+    padding: 8px 12px;
+  }
+}
