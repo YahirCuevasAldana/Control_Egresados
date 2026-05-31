@@ -75,7 +75,7 @@ export default function Egresados() {
       <div className="page-header">
         <div>
           <div className="page-title">Egresados</div>
-          <div className="page-sub">{lista.length} registros en total</div>
+          <div className="page-sub">{listaSegura.length} registros en total</div>
         </div>
         <button className="btn-naranja" onClick={() => navigate("/agregar")}>
           <MdPersonAdd style={{ fontSize: 18 }} /> Agregar Egresado

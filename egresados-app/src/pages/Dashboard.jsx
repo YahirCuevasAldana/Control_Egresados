@@ -243,7 +243,7 @@ const sinActiv = lista.filter(
           <div className="spinner-border text-primary" />
           <span>Cargando estadísticas...</span>
         </div>
-      ) : !data.length ? (
+      ) : !lista.length ? (
         <div style={{ textAlign: "center", padding: "clamp(30px, 5vw, 50px) 0", color: "#64748b" }}>
           No hay datos. Agrega egresados para ver las estadísticas.
         </div>
