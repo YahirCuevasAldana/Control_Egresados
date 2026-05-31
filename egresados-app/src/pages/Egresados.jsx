@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdSearch, MdEdit, MdDelete, MdPersonAdd } from "react-icons/md";
+import { API_URL } from "../config";
 import "../styles/egresados.css";
 
 function Badge({ actividad }) {
@@ -25,7 +26,7 @@ export default function Egresados() {
   const cargar = async () => {
     try {
       setCargando(true);
-      const r = await fetch("http://localhost:3000/api/egresados");
+      const r = await fetch(`${API_URL}/api/egresados`);
       setLista(await r.json());
     } catch { alert("No se pudo conectar con el servidor."); }
     finally   { setCargando(false); }
@@ -33,7 +34,7 @@ export default function Egresados() {
 
   const eliminar = async (id, nombre) => {
     if (!confirm(`¿Eliminar a ${nombre}? Esta acción no se puede deshacer.`)) return;
-    await fetch(`http://localhost:3000/api/egresados/${id}`, { method: "DELETE" });
+    await fetch(`${API_URL}/api/egresados/${id}`, { method: "DELETE" });
     setLista(p => p.filter(e => e.no_control !== id));
   };
 

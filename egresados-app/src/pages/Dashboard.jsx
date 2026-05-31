@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Chart, registerables } from "chart.js";
 import { MdPeople, MdVerified, MdWork, MdWarning } from "react-icons/md";
+import { API_URL } from "../config";
 import "../styles/dashboard.css";
 
 Chart.register(...registerables);
@@ -33,7 +34,7 @@ export default function Dashboard() {
   const rSexo      = useRef(null); const iSexo      = useRef(null);
 
 useEffect(() => {
-  fetch("https://api-egresado.onrender.com/api/egresados")
+  fetch(`${API_URL}/api/egresados`)
     .then(r => r.json())
     .then(response => {
       console.log("Respuesta API:", response);

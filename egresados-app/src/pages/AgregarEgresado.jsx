@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdArrowBack, MdArrowForward, MdSave } from "react-icons/md";
+import { API_URL } from "../config";
 import "../styles/formulario.css";
 
 const INIT = {
@@ -124,7 +125,7 @@ export default function AgregarEgresado() {
   const guardar = async () => {
     if (!validarPaso()) return;
     try {
-      const res = await fetch("http://localhost:3000/api/egresados", {
+      const res = await fetch(`${API_URL}/api/egresados`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

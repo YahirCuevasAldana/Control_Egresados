@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { MdArrowBack, MdArrowForward, MdSave } from "react-icons/md";
+import { API_URL } from "../config";
 import "../styles/formulario.css";
 
 const INIT = {
@@ -71,7 +72,7 @@ export default function EditarEgresado() {
   const [toast, setToast]       = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/egresados/${id}`)
+    fetch(`${API_URL}/api/egresados/${id}`)
       .then(r => r.json())
       .then(data => {
         // Asegurar que todos los campos de INIT existan en data
@@ -145,7 +146,7 @@ export default function EditarEgresado() {
   const guardar = async () => {
     if (!validarPaso()) return;
     try {
-      const res = await fetch(`http://localhost:3000/api/egresados/${id}`, {
+      const res = await fetch(`${API_URL}/api/egresados/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
