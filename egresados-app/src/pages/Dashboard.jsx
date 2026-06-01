@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Chart, registerables } from "chart.js";
-import { MdPeople, MdVerified, MdWork, MdWarning } from "react-icons/md";
+import { MdPeople, MdVerified, MdWork, MdWarning, MdPersonAdd } from "react-icons/md";
 import { API_URL } from "../config";
 import "../styles/dashboard.css";
+
 
 Chart.register(...registerables);
 
