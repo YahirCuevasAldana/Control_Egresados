@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { MdArrowBack, MdArrowForward, MdSave } from "react-icons/md";
+import { MdArrowBack, MdArrowForward, MdSave, MdPerson, MdHome, MdPhone, MdSchool, MdWork, MdBusiness, MdAssignment, MdRefresh } from "react-icons/md";
 import { API_URL } from "../config";
 import "../styles/formulario.css";
 
@@ -165,15 +165,15 @@ export default function EditarEgresado() {
       console.log("[API Response] Actualizar egresado:", data);
       
       if (res.ok) {
-        setToast("✅ Egresado actualizado");
+        setToast("Egresado actualizado");
         setTimeout(() => navigate("/egresados"), 1500);
       } else {
-        setToast("❌ Error: " + (data.message || "Error desconocido"));
+        setToast("Error: " + (data.message || "Error desconocido"));
         setTimeout(() => setToast(""), 3000);
       }
     } catch (error) {
       console.error("[Error] Actualizar fallido:", error);
-      setToast("❌ Sin conexión al servidor");
+      setToast("Sin conexión al servidor");
       setTimeout(() => setToast(""), 3000);
     }
   };
@@ -200,7 +200,7 @@ export default function EditarEgresado() {
           {PASOS.map((label, i) => (
             <div key={i} className={`paso${i===paso?" activo":""}${i<paso?" listo":""}`}
                  onClick={() => i < paso && setPaso(i)}>
-              <div className="paso-num">{i < paso ? "✓" : i + 1}</div>
+              <div className="paso-num">{i < paso ? "✔" : i + 1}</div>
               <div className="paso-label" style={{ whiteSpace:"pre" }}>{label}</div>
             </div>
           ))}
@@ -213,7 +213,7 @@ export default function EditarEgresado() {
 
           {paso === 0 && (
             <>
-              <div className="seccion-titulo"><span className="seccion-icono">👤</span> Datos Personales</div>
+              <div className="seccion-titulo"><span className="seccion-icono"><MdPerson /></span> Datos Personales</div>
               <div className="row g-3">
                 <div className="col-md-6"><Input label="Nombre completo" name="nombre_completo" form={form} set={set} errores={errores} /></div>
                 <div className="col-md-6"><Input label="Fecha de nacimiento" name="fecha_nacimiento" type="date" form={form} set={set} errores={errores} /></div>
@@ -221,7 +221,7 @@ export default function EditarEgresado() {
                 <div className="col-md-3"><Select label="Estado civil" name="estado_civil" opts={["Soltero","Casado","Divorciado","Viudo","Unión libre"]} form={form} set={set} errores={errores} /></div>
                 <div className="col-md-3"><Select label="Sexo" name="sexo" opts={["Masculino","Femenino"]} form={form} set={set} errores={errores} /></div>
               </div>
-              <div className="seccion-titulo mt-4"><span className="seccion-icono">🏠</span> Domicilio</div>
+              <div className="seccion-titulo mt-4"><span className="seccion-icono"><MdHome /></span> Domicilio</div>
               <div className="row g-3">
                 <div className="col-md-5"><Input label="Colonia" name="colonia" form={form} set={set} errores={errores} /></div>
                 <div className="col-md-4"><Input label="Ciudad" name="ciudad" form={form} set={set} errores={errores} /></div>
@@ -234,7 +234,7 @@ export default function EditarEgresado() {
 
           {paso === 1 && (
             <>
-              <div className="seccion-titulo"><span className="seccion-icono">📞</span> Contacto</div>
+              <div className="seccion-titulo"><span className="seccion-icono"><MdPhone /></span> Contacto</div>
               <div className="row g-3">
                 <div className="col-md-4"><Input label="Teléfono de casa" name="telefono_casa" form={form} set={set} errores={errores} /></div>
                 <div className="col-md-4"><Input label="Teléfono personal" name="telefono" form={form} set={set} errores={errores} /></div>
@@ -242,7 +242,7 @@ export default function EditarEgresado() {
                 <div className="col-md-4"><Input label="Teléfono familiar 1" name="telefono_fam1" form={form} set={set} errores={errores} /></div>
                 <div className="col-md-4"><Input label="Teléfono familiar 2" name="telefono_fam2" form={form} set={set} errores={errores} /></div>
               </div>
-              <div className="seccion-titulo mt-4"><span className="seccion-icono">🎓</span> Información Académica</div>
+              <div className="seccion-titulo mt-4"><span className="seccion-icono"><MdSchool /></span> Información Académica</div>
               <div className="row g-3">
                 <div className="col-md-3"><Input label="N. Control" name="no_control" disabled form={form} set={set} errores={errores} /></div>
                 <div className="col-md-5"><Select label="Carrera" name="carrera" opts={["Ingeniería en Sistemas Computacionales","Ingeniería Eléctrica","Ingeniería en Administración","Ingeniería Industrial","Ingeniería Informática","Ingeniería Mecatrónica"]} form={form} set={set} errores={errores} /></div>
@@ -261,7 +261,7 @@ export default function EditarEgresado() {
 
           {paso === 2 && (
             <>
-              <div className="seccion-titulo"><span className="seccion-icono">💼</span> Situación Actual</div>
+              <div className="seccion-titulo"><span className="seccion-icono"><MdWork /></span> Situación Actual</div>
               <div className="row g-3">
                 <div className="col-md-6"><Select label="Actividad actual" name="actividad_actual" opts={["Trabaja","No trabaja","Estudia y trabaja","No estudia ni trabaja"]} form={form} set={set} errores={errores} /></div>
               </div>
@@ -272,7 +272,7 @@ export default function EditarEgresado() {
             <>
               {trabajaActualmente && (
                 <>
-                  <div className="seccion-titulo"><span className="seccion-icono">🏢</span> Información Empresarial</div>
+                  <div className="seccion-titulo"><span className="seccion-icono"><MdBusiness /></span> Información Empresarial</div>
                   <div className="row g-3">
                     <div className="col-md-6"><Input label="Nombre empresa / institución" name="nombre_empresa" form={form} set={set} errores={errores} /></div>
                     <div className="col-md-6"><Input label="Dirección (calle)" name="direccion_empresa" form={form} set={set} errores={errores} /></div>
@@ -283,7 +283,7 @@ export default function EditarEgresado() {
                     <div className="col-md-4"><Input label="Teléfono empresa" name="tel_empresa" form={form} set={set} errores={errores} /></div>
                     <div className="col-md-4"><Input label="Correo empresa (RH)" name="correo_empresa" type="email" form={form} set={set} errores={errores} /></div>
                   </div>
-                  <div className="seccion-titulo mt-4"><span className="seccion-icono">📊</span> Información Laboral</div>
+                  <div className="seccion-titulo mt-4"><span className="seccion-icono"><MdAssignment /></span> Información Laboral</div>
                   <div className="row g-3">
                     <div className="col-md-4"><Input label="Puesto / Actividad" name="puesto" form={form} set={set} errores={errores} /></div>
                     <div className="col-md-4"><Input label="Ingreso / Salario" name="salario" form={form} set={set} errores={errores} /></div>
@@ -297,7 +297,7 @@ export default function EditarEgresado() {
                   </div>
                 </>
               )}
-              <div className="seccion-titulo mt-4"><span className="seccion-icono">🔄</span> Estado de Actualización</div>
+              <div className="seccion-titulo mt-4"><span className="seccion-icono"><MdRefresh /></span> Estado de Actualización</div>
               <div className="row g-3">
                 <div className="col-md-6">
                   <Select label="Estado del alumno" name="alumnos_actualizados"

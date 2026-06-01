@@ -159,7 +159,7 @@ export default function Egresados() {
                   <tr>
                     <td colSpan={8}>
                       <div className="tabla-vacia">
-                        <div className="tabla-vacia-ico">🔍</div>
+                      <div className="tabla-vacia-ico"><MdSearch style={{ fontSize: 24 }} /></div>
                         <div className="tabla-vacia-txt">No se encontraron egresados con esos criterios</div>
                       </div>
                     </td>

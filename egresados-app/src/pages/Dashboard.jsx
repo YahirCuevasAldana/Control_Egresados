@@ -224,8 +224,8 @@ const sinActiv = lista.filter(
       {/* Acciones rápidas */}
       <div className="quick-grid">
         {[
-          { icon: "👥", titulo: "Ver Egresados",      desc: "Busca, edita o elimina registros", ruta: "/egresados" },
-          { icon: "➕", titulo: "Registrar Egresado", desc: "Nuevo registro completo",           ruta: "/agregar"   },
+          { icon: <MdPeople />, titulo: "Ver Egresados",      desc: "Busca, edita o elimina registros", ruta: "/egresados" },
+          { icon: <MdPersonAdd />, titulo: "Registrar Egresado", desc: "Nuevo registro completo",           ruta: "/agregar"   },
         ].map(({ icon, titulo, desc, ruta }) => (
           <div className="quick-card" key={ruta} onClick={() => navigate(ruta)}>
             <div className="quick-icon">{icon}</div>
@@ -243,7 +243,7 @@ const sinActiv = lista.filter(
           <div className="spinner-border text-primary" />
           <span>Cargando estadísticas...</span>
         </div>
-      ) : !lista.length ? (
+      ) : !data.length ? (
         <div style={{ textAlign: "center", padding: "clamp(30px, 5vw, 50px) 0", color: "#64748b" }}>
           No hay datos. Agrega egresados para ver las estadísticas.
         </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MdArrowBack, MdArrowForward, MdSave } from "react-icons/md";
+import { MdArrowBack, MdArrowForward, MdSave, MdPerson, MdHome, MdPhone, MdSchool, MdWork, MdBusiness, MdAssignment, MdRefresh } from "react-icons/md";
 import { API_URL } from "../config";
 import "../styles/formulario.css";
 
@@ -134,15 +134,15 @@ export default function AgregarEgresado() {
       console.log("[API Response] Crear egresado:", data);
       
       if (res.ok) {
-        setToast("✅ Egresado guardado con éxito");
+        setToast("Egresado guardado con éxito");
         setTimeout(() => navigate("/egresados"), 1500);
       } else {
-        setToast("❌ Error: " + (data.message || "Error desconocido"));
+        setToast("Error: " + (data.message || "Error desconocido"));
         setTimeout(() => setToast(""), 3000);
       }
     } catch (error) {
       console.error("[Error] Guardar fallido:", error);
-      setToast("❌ No se pudo conectar con el servidor");
+      setToast("No se pudo conectar con el servidor");
       setTimeout(() => setToast(""), 3000);
     }
   };
@@ -167,7 +167,7 @@ export default function AgregarEgresado() {
           {PASOS.map((label, i) => (
             <div key={i} className={`paso${i === paso ? " activo" : ""}${i < paso ? " listo" : ""}`}
                  onClick={() => i < paso && setPaso(i)}>
-              <div className="paso-num">{i < paso ? "✓" : i + 1}</div>
+              <div className="paso-num">{i < paso ? "✔" : i + 1}</div>
               <div className="paso-label" style={{ whiteSpace: "pre" }}>{label}</div>
             </div>
           ))}
@@ -181,7 +181,7 @@ export default function AgregarEgresado() {
           {/* ── PASO 0: Personal y Domicilio ── */}
           {paso === 0 && (
             <div key="paso-0">
-              <div className="seccion-titulo"><span className="seccion-icono">👤</span> Datos Personales</div>
+              <div className="seccion-titulo"><span className="seccion-icono"><MdPerson /></span> Datos Personales</div>
               <div className="row g-3">
                 <div className="col-md-6"><Input label="Nombre completo" name="nombre_completo" form={form} set={set} errores={errores} /></div>
                 <div className="col-md-6"><Input label="Fecha de nacimiento" name="fecha_nacimiento" type="date" form={form} set={set} errores={errores} /></div>
@@ -190,7 +190,7 @@ export default function AgregarEgresado() {
                 <div className="col-md-3"><Select label="Sexo" name="sexo" opts={["Masculino","Femenino"]} form={form} set={set} errores={errores} /></div>
               </div>
 
-              <div className="seccion-titulo mt-4"><span className="seccion-icono">🏠</span> Domicilio</div>
+              <div className="seccion-titulo mt-4"><span className="seccion-icono"><MdHome /></span> Domicilio</div>
               <div className="row g-3">
                 <div className="col-md-5"><Input label="Colonia" name="colonia" form={form} set={set} errores={errores} /></div>
                 <div className="col-md-4"><Input label="Ciudad" name="ciudad" form={form} set={set} errores={errores} /></div>
@@ -204,7 +204,7 @@ export default function AgregarEgresado() {
           {/* ── PASO 1: Contacto y Académico ── */}
           {paso === 1 && (
             <div key="paso-1">
-              <div className="seccion-titulo"><span className="seccion-icono">📞</span> Contacto</div>
+              <div className="seccion-titulo"><span className="seccion-icono"><MdPhone /></span> Contacto</div>
               <div className="row g-3">
                 <div className="col-md-4"><Input label="Teléfono de casa" name="telefono_casa" form={form} set={set} errores={errores} /></div>
                 <div className="col-md-4"><Input label="Teléfono personal" name="telefono" form={form} set={set} errores={errores} /></div>
@@ -213,7 +213,7 @@ export default function AgregarEgresado() {
                 <div className="col-md-4"><Input label="Teléfono familiar 2" name="telefono_fam2" form={form} set={set} errores={errores} /></div>
               </div>
 
-              <div className="seccion-titulo mt-4"><span className="seccion-icono">🎓</span> Información Académica</div>
+              <div className="seccion-titulo mt-4"><span className="seccion-icono"><MdSchool /></span> Información Académica</div>
               <div className="row g-3">
                 <div className="col-md-3"><Input label="N. Control" name="no_control" form={form} set={set} errores={errores} /></div>
                 <div className="col-md-5">
@@ -243,7 +243,7 @@ export default function AgregarEgresado() {
           {/* ── PASO 2: Situación Actual ── */}
           {paso === 2 && (
             <div key="paso-2">
-              <div className="seccion-titulo"><span className="seccion-icono">💼</span> Situación Actual</div>
+              <div className="seccion-titulo"><span className="seccion-icono"><MdWork /></span> Situación Actual</div>
               <div className="row g-3">
                 <div className="col-md-6">
                   <Select label="Actividad actual" name="actividad_actual"
@@ -254,14 +254,14 @@ export default function AgregarEgresado() {
               {!trabajaActualmente && (
                 <div style={{ marginTop: 24, padding: "20px", background: "#f0f4fa",
                   borderRadius: 10, color: "#64748b", fontSize: 13 }}>
-                  💡 Si el egresado trabaja, en el siguiente paso podrás ingresar los datos de su empresa.
+                  Si el egresado trabaja, en el siguiente paso podrás ingresar los datos de su empresa.
                 </div>
               )}
 
               {trabajaActualmente && (
                 <div style={{ marginTop: 16, padding: "14px 18px", background: "#dcfce7",
                   borderRadius: 10, color: "#15803d", fontSize: 13, fontWeight: 500 }}>
-                  ✅ El siguiente paso te pedirá los datos de la empresa y la información laboral.
+                  El siguiente paso te pedirá los datos de la empresa y la información laboral.
                 </div>
               )}
             </div>
@@ -272,7 +272,7 @@ export default function AgregarEgresado() {
             <div key="paso-3">
               {trabajaActualmente && (
                 <>
-                  <div className="seccion-titulo"><span className="seccion-icono">🏢</span> Información Empresarial</div>
+                  <div className="seccion-titulo"><span className="seccion-icono"><MdBusiness /></span> Información Empresarial</div>
                   <div className="row g-3">
                     <div className="col-md-6"><Input label="Nombre de la empresa / institución" name="nombre_empresa" form={form} set={set} errores={errores} /></div>
                     <div className="col-md-6"><Input label="Dirección (calle)" name="direccion_empresa" form={form} set={set} errores={errores} /></div>
@@ -285,7 +285,7 @@ export default function AgregarEgresado() {
                     <div className="col-md-6"><Input label="Correo empresa (Recursos Humanos)" name="correo_empresa" type="email" form={form} set={set} errores={errores} /></div>
                   </div>
 
-                  <div className="seccion-titulo mt-4"><span className="seccion-icono">📊</span> Información Laboral</div>
+                  <div className="seccion-titulo mt-4"><span className="seccion-icono"><MdAssignment /></span> Información Laboral</div>
                   <div className="row g-3">
                     <div className="col-md-4"><Input label="Puesto / Actividad del egresado" name="puesto" form={form} set={set} errores={errores} /></div>
                     <div className="col-md-4"><Input label="Ingreso / Salario" name="salario" form={form} set={set} errores={errores} /></div>
@@ -321,7 +321,7 @@ export default function AgregarEgresado() {
                 </>
               )}
 
-              <div className="seccion-titulo mt-4"><span className="seccion-icono">🔄</span> Estado de Actualización</div>
+              <div className="seccion-titulo mt-4"><span className="seccion-icono"><MdRefresh /></span> Estado de Actualización</div>
               <div className="row g-3">
                 <div className="col-md-6">
                   <Select label="Estado del alumno" name="alumnos_actualizados"
